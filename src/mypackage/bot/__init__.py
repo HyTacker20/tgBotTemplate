@@ -2,9 +2,11 @@ import logging
 import time
 from typing import Optional
 
+from sqlalchemy.orm import sessionmaker
 from telebot import TeleBot
 
-from ..config.models import BotConfig, BotWebhookConfig, MessagesConfig, ButtonsConfig
+from .messages import Messages
+from ..config.models import BotConfig, BotWebhookConfig
 
 from .filters import add_custom_filters
 from .handlers import register_handlers
@@ -54,23 +56,23 @@ def stop_bot(bot: TeleBot, use_webhook: bool):
 
 def setup_bot(
         bot_config: BotConfig,
-        messages: MessagesConfig,
-        buttons: ButtonsConfig,
+        db_session_maker: sessionmaker,
+        db_logger: logging.Logger,
         logger: logging.Logger):
     state_storage = setup_state_storage(bot_config.state_storage)
     bot = TeleBot(bot_config.token, state_storage=state_storage, use_class_middlewares=bot_config.use_class_middlewares)
 
-    add_custom_filters(bot, bot_config.owner_tg_id)
+    add_custom_filters(bot, bot_config.owner_tg_id, bot_config.admins)
     if bot_config.use_class_middlewares:
         setup_middlewares(
             bot=bot,
-            timeout_message=messages.anti_flood,
+            db_session_maker=db_session_maker,
+            db_logger=db_logger,
+            timeout_message=Messages.anti_flood,
             timeout=bot_config.actions_timeout,
-            messages=messages,
-            buttons=buttons,
             logger=logger,
             page_size=bot_config.page_size
         )
-    register_handlers(bot, buttons)
+        register_handlers(bot)
 
     return bot

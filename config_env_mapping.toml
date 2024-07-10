@@ -40,12 +40,3 @@ level = "MYAPP_LOGGER_LEVEL"
 stream = "MYAPP_LOGGER_STREAM"
 file_path = "MYAPP_LOGGER_FILE_PATH"
 format = "MYAPP_LOGGER_FORMAT"
-
-[messages]
-welcome = "MYAPP_MESSAGES_WELCOME"
-help = "MYAPP_MESSAGES_HELP"
-anti_flood = "MYAPP_MESSAGES_ANTI_FLOOD"
-unknown_update = "MYAPP_MESSAGES_UNKNOWN_UPDATE"
-
-[buttons]
-help = "MYAPP_BUTTONS_HELP"

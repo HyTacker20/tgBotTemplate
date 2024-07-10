@@ -3,19 +3,20 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "tgBotTemplate"
+name = "testbot" # <--
 version = "0.0.1"
 authors = [
-    { name = "Konstantin Ostashenko", email = "zxe20jg1t@mozmail.com" },
+    { name = "Your name", email = "test@mail.com" }, # <--
 ]
-description = "Telegram Bot Template"
+description = "Telegram Bot" # <--
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.9" # <--
 dependencies = [
     "adaptix>=3.0.0a5",
     "pytelegrambotapi>=4.13.0",
     "redis>=5.0.0",
-    "toml>=0.10.2; python_version < '3.11'"
+    "toml>=0.10.2",
+    "alembic>=1.13.1"
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -25,8 +26,5 @@ classifiers = [
 
 [project.optional-dependencies]
 
-[project.urls]
-"Homepage" = "https://github.com/Cub11k/tgBotTemplate"
-
 [project.scripts]
-launch-polling = "mypackage:main"
+launch-polling = "mypackage:main" # <--

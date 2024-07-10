@@ -39,6 +39,7 @@ class BotWebhookConfig:
 @dataclass
 class BotConfig:
     owner_tg_id: int  # Bot owner telegram id
+    admins: list
     token: str  # Telegram bot token
     drop_pending: bool  # Drop pending updates on startup
     use_webhook: bool  # Use webhook, otherwise long polling
@@ -53,16 +54,13 @@ class BotConfig:
 
 
 @dataclass
-class MessagesConfig:
-    welcome: str
-    help: str
-    anti_flood: str
-    unknown_update: str
-
-
-@dataclass
-class ButtonsConfig:
-    help: str
+class DBConfig:
+    host: str  # DB host
+    port: int  # DB port
+    user: str  # DB user
+    password: str  # DB user password
+    database: str  # DB title
+    logger: LoggerConfig  # Logger config for DB
 
 
 @dataclass
@@ -70,5 +68,4 @@ class Config:
     bot: BotConfig
     # Extra configs if any
     logger: LoggerConfig  # Logger config for the app
-    messages: MessagesConfig  # Messages text config
-    buttons: ButtonsConfig  # Buttons text config
+    db: DBConfig

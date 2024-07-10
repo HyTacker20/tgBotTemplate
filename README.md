@@ -1,27 +1,29 @@
 # tgBotTemplate
 
 Simple, but extensible template for telegram bot,
-using [pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI)
-and [adaptix](https://github.com/reagento/dataclass-factory/tree/3.x/develop)
+using [pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI), 
+[adaptix](https://github.com/reagento/dataclass-factory/tree/3.x/develop),
+[SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy)
+and [alembic](https://github.com/sqlalchemy/alembic)
 
 ## Installation
 
 ```bash
-git clone https://github.com/Cub11k/tgBotTemplate.git  # via HTTPS
+git clone https://github.com/HyTacker20/tgBotTemplate  # via HTTPS
 # or
-git clone git@github.com:Cub11k/tgBotTemplate.git  # via SSH
+git clone git@github.com:HyTacker20/tgBotTemplate.git  # via SSH
 
 cd tgBotTemplate
 ```
 
 - Change package name, description, version, author, homepage, etc. in `pyproject.toml`
-- Create [virtual environment](https://docs.python.org/3/library/venv.html#creating-virtual-environments) or use the
+- Create [virtual environment](https://pipenv.pypa.io/en/latest/installation.html) or use the
   existing one
-- [Activate](https://docs.python.org/3/library/venv.html#how-venvs-work) virtual environment
+- Activate virtual environment 
 - Install the package in editable mode
 
 ```bash
-pip install -e .
+pip install -e src/.
 ```
 
 ## Usage
@@ -35,16 +37,10 @@ using the environment variables
 | CONFIG_USE_ENV_VARS     | Override config file with environment variables             | `True`, `1`<br/>Default `False`   |
 | CONFIG_ENV_MAPPING_PATH | Path to the file with mapping of config values and env vars | Default `config_env_mapping.toml` |
 
-The simplest way to run the bot using long polling is to use the `launch-polling` script
+To run the bot using long polling use the script
 
 ```bash
-launch-polling <path-to-the-config-file>
-```
-
-To get more details about the script, run it with the `--help` flag
-
-```bash
-launch-polling --help
+python -m src.mypackage
 ```
 
 To run the bot using webhook, you'll have to adjust the module `mypackage:webhook`
@@ -59,12 +55,13 @@ gunicorn 'mypackage:webhook_app()' --bind=$HOST:$PORT --workers-class=$WORKERS_C
 ## Uninstall
 
 ```bash
-pip uninstall <your-package-name>
+pip uninstall <your-package-title>
 ```
 
 Beware that `mypackage` is not the package name, but the name of the module,
 the package name is defined in `pyproject.toml`
 
-## Contribution
+## Author
 
-Feel free to contribute to the project by creating issues and pull requests
+This project is a fork of the original repository [Cub11k/tgBotTemplate](https://github.com/Cub11k/tgBotTemplate).
+

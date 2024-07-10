@@ -1,42 +1,44 @@
 from logging import Logger
 
+from dotenv import load_dotenv
 from telebot import TeleBot
 from telebot.types import Message
 
-from ...config.models import MessagesConfig, ButtonsConfig
+from ..messages import Messages
+from ...db import DBAdapter
 
-from .. import keyboards
-
-
-# Basic commands
-
-# 1. start - send a welcome message with help reply keyboard
-# 2. help - send a help message
+load_dotenv()
 
 
 def start_handler(
         message: Message,
         bot: TeleBot,
-        messages: MessagesConfig,
-        buttons: ButtonsConfig,
+        db_adapter: DBAdapter,
         logger: Logger,
         **kwargs):
-    logger.debug(f"User {message.from_user.id} @{message.from_user.username} started the bot")
-    bot.send_message(message.chat.id, messages.welcome, reply_markup=keyboards.help_reply_keyboard(buttons.help))
+    """
+    Handles the /start command. Registers the user if they are not already in the database and
+    verifies invite codes if provided.
+
+    :param message: The Telegram message object
+    :param bot: The Telegram bot instance
+    :param db_adapter: The database adapter instance
+    :param logger: The logger instance
+    """
+    bot.send_message(message.chat.id, f"Hello {message.from_user.first_name}!")
 
 
 def help_handler(
         message: Message,
         bot: TeleBot,
-        messages: MessagesConfig,
         logger: Logger,
         **kwargs):
     logger.debug(f"User {message.from_user.id} @{message.from_user.username} requested help")
-    bot.send_message(message.chat.id, messages.help)
+    bot.send_message(message.chat.id, Messages.help)
 
 
-def register_handlers(bot: TeleBot, buttons: ButtonsConfig):
+def register_handlers(bot: TeleBot):
     bot.register_message_handler(start_handler, commands=['start'], pass_bot=True)
 
     bot.register_message_handler(help_handler, commands=['help'], pass_bot=True)
-    bot.register_message_handler(help_handler, text_equals=buttons.help, pass_bot=True)
+    bot.register_message_handler(help_handler, text_equals=Messages.help, pass_bot=True)

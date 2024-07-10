@@ -1,16 +1,13 @@
 from telebot import TeleBot
 
-from ...config.models import ButtonsConfig
-
-from . import (
+from src.mypackage.bot.handlers import (
     basic_commands,
-    unhandled,
+    unhandled
 )
 
 
-def register_handlers(bot: TeleBot, buttons: ButtonsConfig):
-    # TODO: register all handlers here
-    basic_commands.register_handlers(bot, buttons)
-
-    # TODO: register all other handlers before this line
+def register_handlers(bot: TeleBot):
+    basic_commands.register_handlers(bot)
     unhandled.register_handlers(bot)
+
+    # TODO: register your handlers here
