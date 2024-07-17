@@ -43,7 +43,7 @@ file_path = "logs/beton_bot.log"
 format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 
 [messages]
-welcome = "Вітаю!"
+welcome = "Hello!"
 help = "Help message"
 anti_flood = "Anti flood message"
 unknown_update = "This feature is not supported yet"

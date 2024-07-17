@@ -1,0 +1,9 @@
+DEBUG=True
+
+TOKEN=123456789:AAEgKeJ26oKH9DEk3lrqT85C_d8IsRw-s-Q
+
+CONFIG_PATH=config.toml
+CONFIG_USE_ENV_VARS=False
+CONFIG_ENV_MAPPING_PATH=config_env_mapping.toml
+
+DB_URL=url to db
